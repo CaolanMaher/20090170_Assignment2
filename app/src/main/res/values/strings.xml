@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Rental Cars</string>
     <string name="button_addRentalCar">Add Rental Car</string>
+    <string name="button_saveRentalCar">Save Rental Car</string>
     <string name="hint_rentalCarBrand">Rental Car Brand</string>
     <string name="hint_rentalCarYear">Rental Car Brand</string>
     <string name="menu_addRentalCar">Add</string>
     <string name="menu_cancelAddRentalCar">Cancel</string>
+    <string name="snackbar_addRentalCar">"Please Enter a brand"</string>
 </resources>

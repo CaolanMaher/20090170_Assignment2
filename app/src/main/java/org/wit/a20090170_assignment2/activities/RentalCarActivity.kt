@@ -18,6 +18,8 @@ class RentalCarActivity : AppCompatActivity() {
     var rentalCar = RentalCarModel()
     lateinit var app : MainApp
 
+    var edit = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,21 +31,38 @@ class RentalCarActivity : AppCompatActivity() {
 
         app = application as MainApp
 
+        if(intent.hasExtra("rentalCar_edit")) {
+            edit = true
+
+            rentalCar = intent.extras?.getParcelable("rentalCar_edit")!!
+
+            // fill in text fields with data
+            binding.rentalCarBrand.setText(rentalCar.brand)
+            binding.rentalCarYear.setText(rentalCar.year.toString())
+
+            // change button text
+            binding.btnAdd.setText(R.string.button_saveRentalCar)
+        }
+
         binding.btnAdd.setOnClickListener() {
             try {
+                // get data from text fields
                 rentalCar.brand = binding.rentalCarBrand.text.toString()
                 rentalCar.year = binding.rentalCarYear.text.toString().toInt()
-                app.rentalCars.add(rentalCar.copy())
 
-                for (i in 0 until app.rentalCars.size) {
-                    i(app.rentalCars[i].brand + " " + app.rentalCars[i].year)
+                if(edit) {
+                    // if we are editing
+                    app.rentalCars.update(rentalCar.copy())
+                }
+                else {
+                    // if we are creating
+                    app.rentalCars.create(rentalCar.copy())
                 }
 
                 setResult(RESULT_OK)
                 finish()
-            }
-            catch (e : Exception) {
-                i("Need Number for year")
+            } catch (e: Exception) {
+                Snackbar.make(it, R.string.snackbar_addRentalCar, Snackbar.LENGTH_LONG).show()
             }
         }
     }

@@ -1,9 +1,12 @@
 package org.wit.a20090170_assignment2.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
 
+@Parcelize
 data class RentalCarModel(
-    //var id: Long = 0,
+    var id: Long = 0,
     var brand: String = "",
     var year: Int = 0,
     var registration: String = "1-A-1111",
@@ -12,4 +15,4 @@ data class RentalCarModel(
     var dateRented: LocalDate = LocalDate.parse("1111-11-11"),
     var dateReturn: LocalDate = LocalDate.parse("1111-11-11"),
     var fuelSource: String = ""
-)
+) : Parcelable

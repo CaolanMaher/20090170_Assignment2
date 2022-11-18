@@ -10,10 +10,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.a20090170_assignment2.R
 import org.wit.a20090170_assignment2.adapters.RentalCarAdapter
+import org.wit.a20090170_assignment2.adapters.RentalCarListener
 import org.wit.a20090170_assignment2.databinding.ActivityRentalCarListBinding
 import org.wit.a20090170_assignment2.main.MainApp
+import org.wit.a20090170_assignment2.models.RentalCarModel
 
-class RentalCarListActivity : AppCompatActivity() {
+class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityRentalCarListBinding
@@ -30,7 +32,8 @@ class RentalCarListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = RentalCarAdapter(app.rentalCars)
+        //binding.recyclerView.adapter = RentalCarAdapter(app.rentalCars)
+        binding.recyclerView.adapter = RentalCarAdapter(app.rentalCars.findAll(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,12 +53,21 @@ class RentalCarListActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private val getResult =
-        registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) {
-            if(it.resultCode == Activity.RESULT_OK) {
-                (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.rentalCars.size)
-            }
+    private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode == Activity.RESULT_OK) {
+            (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.rentalCars.findAll().size)
         }
+    }
+
+    override fun onRentalCarClick(rentalCar: RentalCarModel) {
+        val launcherIntent = Intent(this, RentalCarActivity::class.java)
+        launcherIntent.putExtra("rentalCar_edit", rentalCar)
+        getClickResult.launch(launcherIntent)
+    }
+
+    private val getClickResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode == Activity.RESULT_OK) {
+            (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.rentalCars.findAll().size)
+        }
+    }
 }

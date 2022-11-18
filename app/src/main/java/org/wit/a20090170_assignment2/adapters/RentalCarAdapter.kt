@@ -6,7 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import org.wit.a20090170_assignment2.databinding.CardRentalCarBinding
 import org.wit.a20090170_assignment2.models.RentalCarModel
 
-class RentalCarAdapter constructor(private val rentalCars: List<RentalCarModel>) : RecyclerView.Adapter<RentalCarAdapter.MainHolder>() {
+interface RentalCarListener {
+    fun onRentalCarClick(rentalCar: RentalCarModel)
+}
+
+class RentalCarAdapter constructor(private val rentalCars: List<RentalCarModel>, private val listener: RentalCarListener) : RecyclerView.Adapter<RentalCarAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardRentalCarBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -16,15 +20,16 @@ class RentalCarAdapter constructor(private val rentalCars: List<RentalCarModel>)
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val rentalCar = rentalCars[holder.adapterPosition]
-        holder.bind(rentalCar)
+        holder.bind(rentalCar, listener)
     }
 
     override fun getItemCount(): Int = rentalCars.size
 
     class MainHolder(private val binding : CardRentalCarBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(rentalCar: RentalCarModel) {
+        fun bind(rentalCar: RentalCarModel, listener: RentalCarListener) {
             binding.rentalCarBrand.text = rentalCar.brand
             binding.rentalCarYear.text = rentalCar.year.toString()
+            binding.root.setOnClickListener{ listener.onRentalCarClick(rentalCar) }
         }
     }
 }
