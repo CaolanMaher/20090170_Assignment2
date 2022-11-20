@@ -9,7 +9,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import org.wit.a20090170_assignment2.activities.databinding.ActivityMapBinding
+import org.wit.a20090170_assignment2.R
+import org.wit.a20090170_assignment2.databinding.ActivityMapBinding
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 

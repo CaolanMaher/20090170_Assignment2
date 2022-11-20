@@ -22,6 +22,7 @@ class RentalCarActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCarRentalBinding
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     var rentalCar = RentalCarModel()
     lateinit var app : MainApp
 
@@ -84,8 +85,11 @@ class RentalCarActivity : AppCompatActivity() {
         registerImagePickerCallback()
 
         binding.rentalCarLocation.setOnClickListener {
-            i ("Set Location Pressed")
+            val launcherIntent = Intent(this, MapActivity::class.java)
+            mapIntentLauncher.launch(launcherIntent)
         }
+
+        registerMapCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -118,5 +122,11 @@ class RentalCarActivity : AppCompatActivity() {
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
+    }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { i("Map Loaded") }
     }
 }
