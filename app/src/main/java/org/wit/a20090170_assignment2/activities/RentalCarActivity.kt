@@ -1,12 +1,18 @@
 package org.wit.a20090170_assignment2.activities
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import org.wit.a20090170_assignment2.R
 import org.wit.a20090170_assignment2.databinding.ActivityCarRentalBinding
+import org.wit.a20090170_assignment2.helpers.showImagePicker
 import org.wit.a20090170_assignment2.main.MainApp
 import org.wit.a20090170_assignment2.models.RentalCarModel
 import timber.log.Timber
@@ -15,6 +21,7 @@ import timber.log.Timber.i
 class RentalCarActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCarRentalBinding
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     var rentalCar = RentalCarModel()
     lateinit var app : MainApp
 
@@ -39,8 +46,12 @@ class RentalCarActivity : AppCompatActivity() {
             // fill in text fields with data
             binding.rentalCarBrand.setText(rentalCar.brand)
             binding.rentalCarYear.setText(rentalCar.year.toString())
+            Picasso.get().load(rentalCar.image).into(binding.rentalCarImage)
+            if(rentalCar.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.button_changeImage)
+            }
 
-            // change button text
+            // change add button text
             binding.btnAdd.setText(R.string.button_saveRentalCar)
         }
 
@@ -65,6 +76,16 @@ class RentalCarActivity : AppCompatActivity() {
                 Snackbar.make(it, R.string.snackbar_addRentalCar, Snackbar.LENGTH_LONG).show()
             }
         }
+
+        binding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher)
+        }
+
+        registerImagePickerCallback()
+
+        binding.rentalCarLocation.setOnClickListener {
+            i ("Set Location Pressed")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -79,5 +100,23 @@ class RentalCarActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                            rentalCar.image = result.data!!.data!!
+                            Picasso.get().load(rentalCar.image).into(binding.rentalCarImage)
+                            binding.chooseImage.setText(R.string.button_changeImage)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
 }

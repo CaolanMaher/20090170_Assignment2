@@ -2,9 +2,14 @@
     <string name="app_name">Rental Cars</string>
     <string name="button_addRentalCar">Add Rental Car</string>
     <string name="button_saveRentalCar">Save Rental Car</string>
-    <string name="hint_rentalCarBrand">Rental Car Brand</string>
-    <string name="hint_rentalCarYear">Rental Car Brand</string>
+    <string name="hint_rentalCarBrand">Brand</string>
+    <string name="hint_rentalCarYear">Year</string>
     <string name="menu_addRentalCar">Add</string>
     <string name="menu_cancelAddRentalCar">Cancel</string>
     <string name="snackbar_addRentalCar">"Please Enter a brand"</string>
+    <string name="button_addImage">Add Image</string>
+    <string name="button_changeImage">Change Image</string>
+    <string name="select_rentalCar_image">Select rental car image</string>
+    <string name="button_location">Set Location</string>
+    <string name="title_activity_map">MapActivity</string>
 </resources>

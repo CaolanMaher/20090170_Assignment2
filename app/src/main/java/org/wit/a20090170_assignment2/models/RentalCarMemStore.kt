@@ -27,6 +27,7 @@ class RentalCarMemStore : RentalCarStore {
         if(foundRentalCar != null) {
             foundRentalCar.brand = rentalCar.brand
             foundRentalCar.year = rentalCar.year
+            foundRentalCar.image = rentalCar.image
         }
     }
 

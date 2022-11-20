@@ -3,6 +3,7 @@ package org.wit.a20090170_assignment2.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.wit.a20090170_assignment2.databinding.CardRentalCarBinding
 import org.wit.a20090170_assignment2.models.RentalCarModel
 
@@ -29,6 +30,7 @@ class RentalCarAdapter constructor(private val rentalCars: List<RentalCarModel>,
         fun bind(rentalCar: RentalCarModel, listener: RentalCarListener) {
             binding.rentalCarBrand.text = rentalCar.brand
             binding.rentalCarYear.text = rentalCar.year.toString()
+            Picasso.get().load(rentalCar.image).resize(200, 200).into(binding.imageIcon)
             binding.root.setOnClickListener{ listener.onRentalCarClick(rentalCar) }
         }
     }

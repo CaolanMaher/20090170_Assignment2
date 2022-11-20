@@ -1,5 +1,6 @@
 package org.wit.a20090170_assignment2.models
 
+import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
@@ -14,5 +15,6 @@ data class RentalCarModel(
     var isAvailable: String = "N",
     var dateRented: LocalDate = LocalDate.parse("1111-11-11"),
     var dateReturn: LocalDate = LocalDate.parse("1111-11-11"),
-    var fuelSource: String = ""
+    var fuelSource: String = "",
+    var image: Uri = Uri.EMPTY
 ) : Parcelable
