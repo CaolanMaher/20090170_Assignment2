@@ -2,6 +2,7 @@ package org.wit.a20090170_assignment2.main
 
 import android.app.Application
 import com.github.ajalt.timberkt.Timber
+import org.wit.a20090170_assignment2.models.RentalCarJSONStore
 import org.wit.a20090170_assignment2.models.RentalCarMemStore
 import org.wit.a20090170_assignment2.models.RentalCarModel
 import org.wit.a20090170_assignment2.models.RentalCarStore
@@ -16,7 +17,8 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        rentalCars = RentalCarMemStore()
+        //rentalCars = RentalCarMemStore()
+        rentalCars = RentalCarJSONStore(applicationContext)
         i("App Started")
     }
 }

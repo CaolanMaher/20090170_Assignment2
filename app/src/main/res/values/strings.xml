@@ -6,6 +6,7 @@
     <string name="hint_rentalCarYear">Year</string>
     <string name="menu_addRentalCar">Add</string>
     <string name="menu_cancelAddRentalCar">Cancel</string>
+    <string name="menu_deleteAddRentalCar">Delete</string>
     <string name="snackbar_addRentalCar">"Please Enter a brand"</string>
     <string name="button_addImage">Add Image</string>
     <string name="button_changeImage">Change Image</string>

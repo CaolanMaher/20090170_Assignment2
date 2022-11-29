@@ -20,6 +20,8 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
     lateinit var app: MainApp
     private lateinit var binding: ActivityRentalCarListBinding
 
+    private var position: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRentalCarListBinding.inflate(layoutInflater)
@@ -59,15 +61,21 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
         }
     }
 
-    override fun onRentalCarClick(rentalCar: RentalCarModel) {
+    override fun onRentalCarClick(rentalCar: RentalCarModel, pos: Int) {
         val launcherIntent = Intent(this, RentalCarActivity::class.java)
         launcherIntent.putExtra("rentalCar_edit", rentalCar)
+        position = pos
         getClickResult.launch(launcherIntent)
     }
 
     private val getClickResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK) {
             (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.rentalCars.findAll().size)
+        }
+        else { // deleting
+            if(it.resultCode == 99) {
+                (binding.recyclerView.adapter)?.notifyItemRemoved(position)
+            }
         }
     }
 }

@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'org.wit.a20090170_assignment2'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "org.wit.a20090170_assignment2"
         minSdk 30
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 

@@ -8,7 +8,7 @@ import org.wit.a20090170_assignment2.databinding.CardRentalCarBinding
 import org.wit.a20090170_assignment2.models.RentalCarModel
 
 interface RentalCarListener {
-    fun onRentalCarClick(rentalCar: RentalCarModel)
+    fun onRentalCarClick(rentalCar: RentalCarModel, position : Int)
 }
 
 class RentalCarAdapter constructor(private val rentalCars: List<RentalCarModel>, private val listener: RentalCarListener) : RecyclerView.Adapter<RentalCarAdapter.MainHolder>() {
@@ -31,7 +31,7 @@ class RentalCarAdapter constructor(private val rentalCars: List<RentalCarModel>,
             binding.rentalCarBrand.text = rentalCar.brand
             binding.rentalCarYear.text = rentalCar.year.toString()
             Picasso.get().load(rentalCar.image).resize(200, 200).into(binding.imageIcon)
-            binding.root.setOnClickListener{ listener.onRentalCarClick(rentalCar) }
+            binding.root.setOnClickListener{ listener.onRentalCarClick(rentalCar, adapterPosition) }
         }
     }
 }

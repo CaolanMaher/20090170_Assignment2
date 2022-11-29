@@ -34,6 +34,13 @@ class RentalCarMemStore : RentalCarStore {
         }
     }
 
+    override fun delete(rentalCar: RentalCarModel) {
+        var foundRentalCar: RentalCarModel? = rentalCars.find{ r -> r.id == rentalCar.id }
+        if(foundRentalCar != null) {
+            rentalCars.remove(foundRentalCar)
+        }
+    }
+
     fun logAll() {
         rentalCars.forEach{ i("${it}") }
     }

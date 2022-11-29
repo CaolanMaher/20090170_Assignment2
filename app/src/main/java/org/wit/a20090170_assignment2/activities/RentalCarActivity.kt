@@ -82,7 +82,7 @@ class RentalCarActivity : AppCompatActivity() {
         }
 
         binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher)
+            showImagePicker(imageIntentLauncher, this)
         }
 
         registerImagePickerCallback()
@@ -106,12 +106,21 @@ class RentalCarActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_rental_car, menu)
+        if(edit) {
+            // make delete button visible
+            menu.getItem(0).isVisible = true
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_cancel -> {
+                finish()
+            }
+            R.id.item_delete -> {
+                app.rentalCars.delete(rentalCar)
+                setResult(99)
                 finish()
             }
         }
@@ -126,7 +135,11 @@ class RentalCarActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            rentalCar.image = result.data!!.data!!
+
+                            val image = result.data!!.data!!
+                            contentResolver.takePersistableUriPermission(image, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+                            rentalCar.image = image
                             Picasso.get().load(rentalCar.image).into(binding.rentalCarImage)
                             binding.chooseImage.setText(R.string.button_changeImage)
                         } // end of if

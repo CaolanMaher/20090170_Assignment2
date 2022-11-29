@@ -4,4 +4,5 @@ interface RentalCarStore {
     fun findAll(): List<RentalCarModel>
     fun create(rentalCar: RentalCarModel)
     fun update(rentalCar: RentalCarModel)
+    fun delete(rentalCar: RentalCarModel)
 }
