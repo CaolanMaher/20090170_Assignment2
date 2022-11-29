@@ -28,6 +28,9 @@ class RentalCarMemStore : RentalCarStore {
             foundRentalCar.brand = rentalCar.brand
             foundRentalCar.year = rentalCar.year
             foundRentalCar.image = rentalCar.image
+            foundRentalCar.lat = rentalCar.lat
+            foundRentalCar.lng = rentalCar.lng
+            foundRentalCar.zoom = rentalCar.zoom
         }
     }
 

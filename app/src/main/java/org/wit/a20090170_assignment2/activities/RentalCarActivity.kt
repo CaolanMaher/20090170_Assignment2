@@ -14,6 +14,7 @@ import org.wit.a20090170_assignment2.R
 import org.wit.a20090170_assignment2.databinding.ActivityCarRentalBinding
 import org.wit.a20090170_assignment2.helpers.showImagePicker
 import org.wit.a20090170_assignment2.main.MainApp
+import org.wit.a20090170_assignment2.models.Location
 import org.wit.a20090170_assignment2.models.RentalCarModel
 import timber.log.Timber
 import timber.log.Timber.i
@@ -25,6 +26,8 @@ class RentalCarActivity : AppCompatActivity() {
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     var rentalCar = RentalCarModel()
     lateinit var app : MainApp
+
+    //var location = Location()
 
     var edit = false
 
@@ -85,7 +88,16 @@ class RentalCarActivity : AppCompatActivity() {
         registerImagePickerCallback()
 
         binding.rentalCarLocation.setOnClickListener {
-            val launcherIntent = Intent(this, MapActivity::class.java)
+            i("Launching Map")
+            val location = Location(52.245696, -7.139102, 15f)
+
+            // Check if the default has been changed (we have set a location)
+            if(rentalCar.zoom != 0f) {
+                location.lat = rentalCar.lat
+                location.lng = rentalCar.lng
+                location.zoom = rentalCar.zoom
+            }
+            val launcherIntent = Intent(this, MapActivity::class.java).putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
         }
 
@@ -126,7 +138,20 @@ class RentalCarActivity : AppCompatActivity() {
 
     private fun registerMapCallback() {
         mapIntentLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { i("Map Loaded") }
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                    result -> when(result.resultCode) {
+                RESULT_OK -> {
+                    if(result.data != null) {
+                        i("Got location ${result.data.toString()}")
+                        val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                        i("Location == $location")
+                        rentalCar.lat = location.lat
+                        rentalCar.lng = location.lng
+                        rentalCar.zoom = location.zoom
+                    }
+                }
+                RESULT_CANCELED -> { i("CANCELLED") } else -> {}
+            }
+            }
     }
 }
