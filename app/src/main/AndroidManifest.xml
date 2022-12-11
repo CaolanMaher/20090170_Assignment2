@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+
     <application
         android:name="org.wit.a20090170_assignment2.main.MainApp"
         android:allowBackup="true"
@@ -13,6 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.20090170_Assignment2"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.RentalCarsMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_rental_cars_maps"
+            android:theme="@style/Theme.20090170_Assignment2.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
@@ -41,10 +54,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
     </application>
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
 
 </manifest>
