@@ -5,4 +5,5 @@ interface RentalCarStore {
     fun create(rentalCar: RentalCarModel)
     fun update(rentalCar: RentalCarModel)
     fun delete(rentalCar: RentalCarModel)
+    fun getCarsForUser(userId: String): List<RentalCarModel>
 }

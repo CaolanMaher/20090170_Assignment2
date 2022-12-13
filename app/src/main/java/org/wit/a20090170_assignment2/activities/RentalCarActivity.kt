@@ -18,6 +18,7 @@ import org.wit.a20090170_assignment2.models.Location
 import org.wit.a20090170_assignment2.models.RentalCarModel
 import timber.log.Timber
 import timber.log.Timber.i
+import java.time.LocalDate
 
 class RentalCarActivity : AppCompatActivity() {
 
@@ -50,6 +51,13 @@ class RentalCarActivity : AppCompatActivity() {
             // fill in text fields with data
             binding.rentalCarBrand.setText(rentalCar.brand)
             binding.rentalCarYear.setText(rentalCar.year.toString())
+            binding.rentalCarRegistration.setText(rentalCar.registration)
+            binding.rentalCarRate.setText(rentalCar.rate.toString())
+            binding.rentalCarIsAvailable.setText(rentalCar.isAvailable)
+            binding.rentalCarDateRented.setText(rentalCar.dateRented.toString())
+            binding.rentalCarDateReturn.setText(rentalCar.dateReturn.toString())
+            binding.rentalCarFuelSource.setText(rentalCar.fuelSource)
+
             Picasso.get().load(rentalCar.image).into(binding.rentalCarImage)
             if(rentalCar.image != Uri.EMPTY) {
                 binding.chooseImage.setText(R.string.button_changeImage)
@@ -64,6 +72,14 @@ class RentalCarActivity : AppCompatActivity() {
                 // get data from text fields
                 rentalCar.brand = binding.rentalCarBrand.text.toString()
                 rentalCar.year = binding.rentalCarYear.text.toString().toInt()
+                rentalCar.registration = binding.rentalCarRegistration.text.toString()
+                rentalCar.rate = binding.rentalCarRate.text.toString().toDouble()
+                rentalCar.isAvailable = binding.rentalCarIsAvailable.text.toString()
+                rentalCar.dateRented = binding.rentalCarDateRented.text.toString()
+                rentalCar.dateReturn = binding.rentalCarDateReturn.text.toString()
+                rentalCar.fuelSource = binding.rentalCarFuelSource.text.toString()
+
+                //i("ID: " + rentalCar.id.toString())
 
                 if(edit) {
                     // if we are editing
@@ -77,7 +93,8 @@ class RentalCarActivity : AppCompatActivity() {
                 setResult(RESULT_OK)
                 finish()
             } catch (e: Exception) {
-                Snackbar.make(it, R.string.snackbar_addRentalCar, Snackbar.LENGTH_LONG).show()
+                //Snackbar.make(it, R.string.snackbar_addRentalCar, Snackbar.LENGTH_LONG).show()
+                i(e)
             }
         }
 

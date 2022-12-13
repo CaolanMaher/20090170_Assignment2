@@ -62,6 +62,10 @@ class RentalCarJSONStore(private val context: Context) : RentalCarStore {
         }
     }
 
+    override fun getCarsForUser(userId: String): List<RentalCarModel> {
+        TODO("Not yet implemented")
+    }
+
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(rentalCars, listType)
         write(context, JSON_FILE, jsonString)
