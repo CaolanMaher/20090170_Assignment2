@@ -68,6 +68,27 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
                 binding.loadingBar.visibility = View.GONE
             }, 2000)
         }
+
+        binding.searchButton.setOnClickListener {
+            var brandToSearch = binding.searchBrand.text.toString()
+            var yearToSearch = binding.searchYear.text.toString().toInt()
+
+            var newList = mutableListOf<RentalCarModel>()
+
+            app.rentalCars.findAll().forEach {
+                if(it.brand == brandToSearch && it.year == yearToSearch) {
+                    newList.add(it)
+
+                    binding.recyclerView.adapter =
+                        RentalCarAdapter(newList, this)
+                }
+            }
+        }
+
+        binding.cancelButton.setOnClickListener {
+            binding.recyclerView.adapter =
+                RentalCarAdapter(app.rentalCars.findAll(), this)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
