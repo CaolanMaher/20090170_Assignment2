@@ -4,6 +4,12 @@
     <string name="button_saveRentalCar">Save Rental Car</string>
     <string name="hint_rentalCarBrand">Brand</string>
     <string name="hint_rentalCarYear">Year</string>
+    <string name="hint_rentalCarRegistration">Registration (00-A-0000)</string>
+    <string name="hint_rentalCarRate">Rate</string>
+    <string name="hint_rentalCarIsAvailable">Is Available (Y/N)</string>
+    <string name="hint_rentalCarDateRented">Date Rented (DD-MM-YYYY)</string>
+    <string name="hint_rentalCarDateReturn">Date Return (DD-MM-YYYY)</string>
+    <string name="hint_rentalCarFuelSource">Fuel Source</string>
     <string name="menu_addRentalCar">Add</string>
     <string name="menu_cancelAddRentalCar">Cancel</string>
     <string name="menu_deleteAddRentalCar">Delete</string>
@@ -14,6 +20,11 @@
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_rental_cars_maps">Map of All Rental Cars</string>
+    <string name="titleSignIn">Sign In</string>
+    <string name="titleRegister">Register</string>
+    <string name="buttonSignIn">Sign In</string>
+    <string name="buttonRegister">Register</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

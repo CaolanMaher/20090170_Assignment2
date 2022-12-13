@@ -1,12 +1,17 @@
 package org.wit.a20090170_assignment2.models
 
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.ktx.Firebase
 import org.wit.a20090170_assignment2.helpers.exists
 import timber.log.Timber.i
 import java.util.*
 
 class RentalCarFireStore : RentalCarStore{
+
+    private lateinit var auth: FirebaseAuth
 
     private val db = FirebaseFirestore.getInstance()
 
@@ -28,6 +33,8 @@ class RentalCarFireStore : RentalCarStore{
                     }
                 }
             }
+
+        auth = Firebase.auth
     }
 
     override fun findAll(): List<RentalCarModel> {
@@ -35,6 +42,10 @@ class RentalCarFireStore : RentalCarStore{
     }
 
     override fun create(rentalCar: RentalCarModel) {
+        var user = auth.currentUser
+        if (user != null) {
+            rentalCar.userId = user.uid
+        }
         rentalCar.id = generateRandomId()
 
         db.collection("rentalCars")
