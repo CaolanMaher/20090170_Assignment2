@@ -41,6 +41,10 @@ class RentalCarMemStore : RentalCarStore {
         }
     }
 
+    override fun getCarsForUser(userId: String): List<RentalCarModel> {
+        TODO("Not yet implemented")
+    }
+
     fun logAll() {
         rentalCars.forEach{ i("${it}") }
     }

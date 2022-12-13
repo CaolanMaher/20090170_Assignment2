@@ -79,7 +79,7 @@ class RentalCarActivity : AppCompatActivity() {
                 rentalCar.dateReturn = binding.rentalCarDateReturn.text.toString()
                 rentalCar.fuelSource = binding.rentalCarFuelSource.text.toString()
 
-                i(rentalCar.dateRented.toString())
+                //i("ID: " + rentalCar.id.toString())
 
                 if(edit) {
                     // if we are editing
