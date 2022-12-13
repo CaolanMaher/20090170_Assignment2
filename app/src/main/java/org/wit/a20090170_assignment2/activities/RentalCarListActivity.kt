@@ -72,6 +72,8 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        //i(binding.toolbar.menu.getItem(0))
+        //return true
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -87,11 +89,23 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
                 val launcherIntent = Intent(this, RentalCarsMapsActivity::class.java)
                 mapIntentLauncher.launch(launcherIntent)
             }
+            R.id.item_signOut -> {
+                // sign out and go to sign in page
+                auth.signOut()
+                //val launcherIntent = Intent(this, SignInActivity::class.java)
+                //signInIntentLauncher.launch(launcherIntent)
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
     private val mapIntentLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { }
+
+    private val signInIntentLauncher =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { }

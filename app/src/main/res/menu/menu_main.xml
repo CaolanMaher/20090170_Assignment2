@@ -2,16 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/item_add"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/menu_addRentalCar"
-        app:showAsAction="always" />
+        <item
+            android:id="@+id/item_add"
+            android:icon="@android:drawable/ic_menu_add"
+            android:iconTint="@color/black"
+            android:title="@string/menu_addRentalCar"
+            app:showAsAction="never" />
 
-    <item
-        android:id="@+id/item_map"
-        android:icon="@android:drawable/ic_menu_mapmode"
-        android:title="@string/menu_addRentalCar"
-        app:showAsAction="always"/>
+        <item
+            android:id="@+id/item_map"
+            android:icon="@android:drawable/ic_menu_mapmode"
+            android:title="@string/menu_rentalCarMap"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/item_signOut"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="@string/menu_signOut"
+            app:showAsAction="never" />
 
 </menu>
