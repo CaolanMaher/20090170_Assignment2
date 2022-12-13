@@ -10,7 +10,9 @@
     <string name="hint_rentalCarDateRented">Date Rented (DD-MM-YYYY)</string>
     <string name="hint_rentalCarDateReturn">Date Return (DD-MM-YYYY)</string>
     <string name="hint_rentalCarFuelSource">Fuel Source</string>
-    <string name="menu_addRentalCar">Add</string>
+    <string name="menu_addRentalCar">Add Car</string>
+    <string name="menu_rentalCarMap">Map of Cars</string>
+    <string name="menu_signOut">Sign Out</string>
     <string name="menu_cancelAddRentalCar">Cancel</string>
     <string name="menu_deleteAddRentalCar">Delete</string>
     <string name="snackbar_addRentalCar">"Please Enter a brand"</string>

@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     tools:context="org.wit.a20090170_assignment2.activities.RentalCarListActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +25,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleTextColor="@color/colorPrimary" />
+            app:titleTextColor="@color/colorPrimary"
+            app:theme="@style/Theme.20090170_Assignment2.AppBarOverlay"
+            />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ProgressBar
@@ -37,6 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

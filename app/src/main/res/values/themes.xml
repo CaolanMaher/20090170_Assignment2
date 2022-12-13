@@ -5,6 +5,8 @@
         <item name="colorPrimary">@color/colorAccent</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="actionMenuTextColor">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -19,7 +21,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.20090170_Assignment2.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.20090170_Assignment2.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
 
     <style name="Theme.20090170_Assignment2.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

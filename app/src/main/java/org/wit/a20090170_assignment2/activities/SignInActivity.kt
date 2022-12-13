@@ -20,25 +20,57 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySignInBinding.inflate(layoutInflater)
+        binding.emailSignIn.setText("")
+        binding.passwordSignIn.setText("")
+        binding.emailRegister.setText("")
+        binding.passwordRegister.setText("")
+
         setContentView(binding.root)
 
         auth = Firebase.auth
 
-        //val currentUser = auth.currentUser
-        //if(currentUser != null){
-        //    reload();
-        //}
-
         binding.buttonSignIn.setOnClickListener {
-            var email = binding.emailSignIn.text.toString()
-            var password = binding.passwordSignIn.text.toString()
-            signIn(email, password)
+            try {
+                var email = binding.emailSignIn.text.toString()
+                var password = binding.passwordSignIn.text.toString()
+                if(email.isNotEmpty() && password.isNotEmpty()) {
+                    signIn(email, password)
+
+                    binding.emailSignIn.setText("")
+                    binding.passwordSignIn.setText("")
+                    binding.emailRegister.setText("")
+                    binding.passwordRegister.setText("")
+                }
+                else {
+                    Toast.makeText(baseContext, "Please fill in necessary fields",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+            catch(e : Exception) {
+                i(e)
+            }
         }
 
         binding.buttonRegister.setOnClickListener {
-            var email = binding.emailRegister.text.toString()
-            var password = binding.passwordRegister.text.toString()
-            createAccount(email, password)
+            try {
+                var email = binding.emailRegister.text.toString()
+                var password = binding.passwordRegister.text.toString()
+                if(email.isNotEmpty() && password.isNotEmpty()) {
+                    createAccount(email, password)
+
+                    binding.emailSignIn.setText("")
+                    binding.passwordSignIn.setText("")
+                    binding.emailRegister.setText("")
+                    binding.passwordRegister.setText("")
+                }
+                else {
+                    Toast.makeText(baseContext, "Please fill in necessary fields",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+            catch(e : Exception) {
+                i(e)
+            }
         }
     }
 

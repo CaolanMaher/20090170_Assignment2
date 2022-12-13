@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
@@ -38,7 +39,7 @@ class RentalCarActivity : AppCompatActivity() {
         binding = ActivityCarRentalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.toolbarAdd.title = title
+        //binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
@@ -54,8 +55,8 @@ class RentalCarActivity : AppCompatActivity() {
             binding.rentalCarRegistration.setText(rentalCar.registration)
             binding.rentalCarRate.setText(rentalCar.rate.toString())
             binding.rentalCarIsAvailable.setText(rentalCar.isAvailable)
-            binding.rentalCarDateRented.setText(rentalCar.dateRented.toString())
-            binding.rentalCarDateReturn.setText(rentalCar.dateReturn.toString())
+            binding.rentalCarDateRented.setText(rentalCar.dateRented)
+            binding.rentalCarDateReturn.setText(rentalCar.dateReturn)
             binding.rentalCarFuelSource.setText(rentalCar.fuelSource)
 
             Picasso.get().load(rentalCar.image).into(binding.rentalCarImage)
@@ -69,29 +70,53 @@ class RentalCarActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener() {
             try {
+
                 // get data from text fields
-                rentalCar.brand = binding.rentalCarBrand.text.toString()
-                rentalCar.year = binding.rentalCarYear.text.toString().toInt()
-                rentalCar.registration = binding.rentalCarRegistration.text.toString()
-                rentalCar.rate = binding.rentalCarRate.text.toString().toDouble()
-                rentalCar.isAvailable = binding.rentalCarIsAvailable.text.toString()
-                rentalCar.dateRented = binding.rentalCarDateRented.text.toString()
-                rentalCar.dateReturn = binding.rentalCarDateReturn.text.toString()
-                rentalCar.fuelSource = binding.rentalCarFuelSource.text.toString()
+                if(binding.rentalCarBrand.text.toString().isNotEmpty() &&
+                    binding.rentalCarYear.text.toString().isNotEmpty() &&
+                    binding.rentalCarRegistration.text.toString().isNotEmpty() &&
+                    binding.rentalCarRate.text.toString().isNotEmpty() &&
+                    binding.rentalCarIsAvailable.text.toString().isNotEmpty() &&
+                    binding.rentalCarDateRented.text.toString().isNotEmpty() &&
+                    binding.rentalCarDateReturn.text.toString().isNotEmpty() &&
+                    binding.rentalCarFuelSource.text.toString().isNotEmpty()) {
 
-                //i("ID: " + rentalCar.id.toString())
+                    rentalCar.brand = binding.rentalCarBrand.text.toString()
+                    try {
+                        rentalCar.year = binding.rentalCarYear.text.toString().toInt()
+                    }
+                    catch(e : Exception) {
+                        Toast.makeText(baseContext, "Please Make Sure All Number Fields Use Numbers",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    rentalCar.registration = binding.rentalCarRegistration.text.toString()
+                    try {
+                        rentalCar.rate = binding.rentalCarRate.text.toString().toDouble()
+                    }
+                    catch(e : Exception) {
+                        Toast.makeText(baseContext, "Please Make Sure All Number Fields Use Numbers",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    rentalCar.isAvailable = binding.rentalCarIsAvailable.text.toString()
+                    rentalCar.dateRented = binding.rentalCarDateRented.text.toString()
+                    rentalCar.dateReturn = binding.rentalCarDateReturn.text.toString()
+                    rentalCar.fuelSource = binding.rentalCarFuelSource.text.toString()
 
-                if(edit) {
-                    // if we are editing
-                    app.rentalCars.update(rentalCar.copy())
+                    if (edit) {
+                        // if we are editing
+                        app.rentalCars.update(rentalCar.copy())
+                    } else {
+                        // if we are creating
+                        app.rentalCars.create(rentalCar.copy())
+                    }
+
+                    setResult(RESULT_OK)
+                    finish()
                 }
                 else {
-                    // if we are creating
-                    app.rentalCars.create(rentalCar.copy())
+                    Toast.makeText(baseContext, "Please Check All Fields Are Filled In",
+                        Toast.LENGTH_SHORT).show()
                 }
-
-                setResult(RESULT_OK)
-                finish()
             } catch (e: Exception) {
                 //Snackbar.make(it, R.string.snackbar_addRentalCar, Snackbar.LENGTH_LONG).show()
                 i(e)
