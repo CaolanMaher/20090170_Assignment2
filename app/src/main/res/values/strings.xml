@@ -7,8 +7,8 @@
     <string name="hint_rentalCarRegistration">Registration (00-A-0000)</string>
     <string name="hint_rentalCarRate">Rate</string>
     <string name="hint_rentalCarIsAvailable">Is Available (Y/N)</string>
-    <string name="hint_rentalCarDateRented">Date Rented (DD-MM-YYYY)</string>
-    <string name="hint_rentalCarDateReturn">Date Return (DD-MM-YYYY)</string>
+    <string name="hint_rentalCarDateRented">Date Rented (DD/MM/YYYY)</string>
+    <string name="hint_rentalCarDateReturn">Date Return (DD/MM/YYYY)</string>
     <string name="hint_rentalCarFuelSource">Fuel Source</string>
     <string name="menu_addRentalCar">Add Car</string>
     <string name="menu_rentalCarMap">Map of Cars</string>

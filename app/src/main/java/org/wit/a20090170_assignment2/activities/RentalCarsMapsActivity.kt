@@ -12,10 +12,12 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
 import org.wit.a20090170_assignment2.R
 import org.wit.a20090170_assignment2.databinding.ActivityRentalCarsMapsBinding
 import org.wit.a20090170_assignment2.databinding.ContentRentalCarsMapsBinding
 import org.wit.a20090170_assignment2.main.MainApp
+import timber.log.Timber.i
 
 class RentalCarsMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
@@ -86,6 +88,17 @@ class RentalCarsMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListe
 
     override fun onMarkerClick(marker: Marker): Boolean {
         contentBinding.currentBrand.text = marker.title
+
+        //i("ID'S" + marker.tag + " " + marker.id)
+
+        app.rentalCars.findAll().forEach {
+            //i("CAR ID" + it.id.toString() + " " + marker.tag)
+            if (marker.tag == it.id) {
+                //i("FOUND IT")
+                contentBinding.currentYear.text = it.year.toString()
+                Picasso.get().load(it.image).into(contentBinding.imageView)
+            }
+        }
 
         return false
     }
