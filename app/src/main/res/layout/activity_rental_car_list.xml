@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 app:theme="@style/Theme.20090170_Assignment2.AppBarOverlay"
                 app:titleTextColor="@color/colorPrimary" />
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView

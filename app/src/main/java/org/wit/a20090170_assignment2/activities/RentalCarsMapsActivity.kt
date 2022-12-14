@@ -42,6 +42,11 @@ class RentalCarsMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListe
         }
     }
 
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
     private fun configureMap() {
         map.uiSettings.isZoomControlsEnabled = true
         // add a marker for each rental car

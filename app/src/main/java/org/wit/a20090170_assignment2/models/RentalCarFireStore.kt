@@ -124,6 +124,8 @@ class RentalCarFireStore : RentalCarStore{
     }
 
     override fun getCarsForUser(userId : String): List<RentalCarModel> {
+        rentalCars.clear()
+
         db.collection("rentalCars")
             .get()
             .addOnCompleteListener {

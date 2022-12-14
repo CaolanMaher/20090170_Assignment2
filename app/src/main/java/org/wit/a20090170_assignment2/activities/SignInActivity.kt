@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import org.wit.a20090170_assignment2.R
 import org.wit.a20090170_assignment2.databinding.ActivitySignInBinding
 import timber.log.Timber.i
 
@@ -84,6 +85,7 @@ class SignInActivity : AppCompatActivity() {
 
                     val launcherIntent = Intent(this, RentalCarListActivity::class.java)
                     listIntentLauncher.launch(launcherIntent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 } else {
                     // If sign in fails, display a message to the user.
                     //Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -104,6 +106,7 @@ class SignInActivity : AppCompatActivity() {
 
                     val launcherIntent = Intent(this, RentalCarListActivity::class.java)
                     listIntentLauncher.launch(launcherIntent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 } else {
                     // If sign in fails, display a message to the user.
                     //Log.w(TAG, "createUserWithEmail:failure", task.exception)

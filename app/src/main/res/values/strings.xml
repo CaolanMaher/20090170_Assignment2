@@ -17,6 +17,7 @@
     <string name="menu_deleteAddRentalCar">Delete</string>
     <string name="snackbar_addRentalCar">"Please Enter a brand"</string>
     <string name="button_addImage">Add Image</string>
+    <string name="button_takeImage">Take Image</string>
     <string name="button_changeImage">Change Image</string>
     <string name="select_rentalCar_image">Select rental car image</string>
     <string name="button_location">Set Location</string>
@@ -30,6 +31,9 @@
     <string name="hint_yearSearch">Year</string>
     <string name="buttonSearch">Search</string>
     <string name="buttonCancel">Cancel</string>
+    <string name="switchNightMode">Night Mode</string>
+    <string name="hint_emailSignIn">Email</string>
+    <string name="hint_passwordSignIn">Password</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
