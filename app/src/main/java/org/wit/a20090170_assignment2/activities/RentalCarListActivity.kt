@@ -77,8 +77,16 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
         }
 
         binding.searchButton.setOnClickListener {
-            var brandToSearch = binding.searchBrand.text.toString()
-            var yearToSearch = binding.searchYear.text.toString().toInt()
+
+            var brandToSearch : String = ""
+            var yearToSearch : Int = 0
+
+            if(binding.searchBrand.text.isNotEmpty()) {
+                brandToSearch = binding.searchBrand.text.toString()
+            }
+            if(binding.searchYear.text.isNotEmpty()) {
+                yearToSearch = binding.searchYear.text.toString().toInt()
+            }
 
             var newList = mutableListOf<RentalCarModel>()
 
@@ -86,9 +94,17 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
                 if(it.brand == brandToSearch && it.year == yearToSearch) {
                     newList.add(it)
 
-                    binding.recyclerView.adapter =
-                        RentalCarAdapter(newList, this)
+                    //binding.recyclerView.adapter =
+                    //    RentalCarAdapter(newList, this)
                 }
+                else if(it.brand == brandToSearch) {
+                    newList.add(it)
+                }
+                else if(it.year == yearToSearch) {
+                    newList.add(it)
+                }
+                binding.recyclerView.adapter =
+                    RentalCarAdapter(newList, this)
             }
         }
 
