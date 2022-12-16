@@ -1,12 +1,7 @@
 package org.wit.a20090170_assignment2.activities
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -17,7 +12,6 @@ import org.wit.a20090170_assignment2.R
 import org.wit.a20090170_assignment2.databinding.ActivityRentalCarsMapsBinding
 import org.wit.a20090170_assignment2.databinding.ContentRentalCarsMapsBinding
 import org.wit.a20090170_assignment2.main.MainApp
-import timber.log.Timber.i
 
 class RentalCarsMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 

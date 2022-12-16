@@ -55,10 +55,10 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
 
         binding.loadingBar.visibility = View.VISIBLE
 
-        var user = auth.currentUser
+        val user = auth.currentUser
         if (user != null) {
 
-            var carList = app.rentalCars.getCarsForUser(user.uid)
+            val carList = app.rentalCars.getCarsForUser(user.uid)
 
             Handler().postDelayed(Runnable {
                 binding.recyclerView.adapter =
@@ -78,8 +78,8 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
 
         binding.searchButton.setOnClickListener {
 
-            var brandToSearch : String = ""
-            var yearToSearch : Int = 0
+            var brandToSearch = ""
+            var yearToSearch = 0
 
             if(binding.searchBrand.text.isNotEmpty()) {
                 brandToSearch = binding.searchBrand.text.toString()
@@ -88,7 +88,7 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
                 yearToSearch = binding.searchYear.text.toString().toInt()
             }
 
-            var newList = mutableListOf<RentalCarModel>()
+            val newList = mutableListOf<RentalCarModel>()
 
             app.rentalCars.findAll().forEach {
                 if(it.brand == brandToSearch && it.year == yearToSearch) {

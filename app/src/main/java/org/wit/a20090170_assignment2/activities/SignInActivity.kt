@@ -32,8 +32,8 @@ class SignInActivity : AppCompatActivity() {
 
         binding.buttonSignIn.setOnClickListener {
             try {
-                var email = binding.emailSignIn.text.toString()
-                var password = binding.passwordSignIn.text.toString()
+                val email = binding.emailSignIn.text.toString()
+                val password = binding.passwordSignIn.text.toString()
                 if(email.isNotEmpty() && password.isNotEmpty()) {
                     signIn(email, password)
 
@@ -54,8 +54,8 @@ class SignInActivity : AppCompatActivity() {
 
         binding.buttonRegister.setOnClickListener {
             try {
-                var email = binding.emailRegister.text.toString()
-                var password = binding.passwordRegister.text.toString()
+                val email = binding.emailRegister.text.toString()
+                val password = binding.passwordRegister.text.toString()
                 if(email.isNotEmpty() && password.isNotEmpty()) {
                     createAccount(email, password)
 
@@ -75,7 +75,7 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    fun signIn(email: String, password: String) {
+    private fun signIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -96,7 +96,7 @@ class SignInActivity : AppCompatActivity() {
             }
     }
 
-    fun createAccount(email: String, password: String) {
+    private fun createAccount(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
