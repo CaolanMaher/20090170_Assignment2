@@ -7,8 +7,8 @@
     <string name="hint_rentalCarRegistration">Registration (00-A-0000)</string>
     <string name="hint_rentalCarRate">Rate</string>
     <string name="hint_rentalCarIsAvailable">Is Available (Y/N)</string>
-    <string name="hint_rentalCarDateRented">Date Rented (DD-MM-YYYY)</string>
-    <string name="hint_rentalCarDateReturn">Date Return (DD-MM-YYYY)</string>
+    <string name="hint_rentalCarDateRented">Date Rented (DD/MM/YYYY)</string>
+    <string name="hint_rentalCarDateReturn">Date Return (DD/MM/YYYY)</string>
     <string name="hint_rentalCarFuelSource">Fuel Source</string>
     <string name="menu_addRentalCar">Add Car</string>
     <string name="menu_rentalCarMap">Map of Cars</string>
@@ -17,6 +17,7 @@
     <string name="menu_deleteAddRentalCar">Delete</string>
     <string name="snackbar_addRentalCar">"Please Enter a brand"</string>
     <string name="button_addImage">Add Image</string>
+    <string name="button_takeImage">Take Image</string>
     <string name="button_changeImage">Change Image</string>
     <string name="select_rentalCar_image">Select rental car image</string>
     <string name="button_location">Set Location</string>
@@ -26,6 +27,13 @@
     <string name="titleRegister">Register</string>
     <string name="buttonSignIn">Sign In</string>
     <string name="buttonRegister">Register</string>
+    <string name="hint_brandSearch">Brand</string>
+    <string name="hint_yearSearch">Year</string>
+    <string name="buttonSearch">Search</string>
+    <string name="buttonCancel">Cancel</string>
+    <string name="switchNightMode">Night Mode</string>
+    <string name="hint_emailSignIn">Email</string>
+    <string name="hint_passwordSignIn">Password</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

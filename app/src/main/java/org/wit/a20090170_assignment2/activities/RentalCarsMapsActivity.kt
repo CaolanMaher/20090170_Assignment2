@@ -1,17 +1,13 @@
 package org.wit.a20090170_assignment2.activities
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
 import org.wit.a20090170_assignment2.R
 import org.wit.a20090170_assignment2.databinding.ActivityRentalCarsMapsBinding
 import org.wit.a20090170_assignment2.databinding.ContentRentalCarsMapsBinding
@@ -40,6 +36,11 @@ class RentalCarsMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListe
             map = it
             configureMap()
         }
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
     private fun configureMap() {
@@ -81,6 +82,17 @@ class RentalCarsMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListe
 
     override fun onMarkerClick(marker: Marker): Boolean {
         contentBinding.currentBrand.text = marker.title
+
+        //i("ID'S" + marker.tag + " " + marker.id)
+
+        app.rentalCars.findAll().forEach {
+            //i("CAR ID" + it.id.toString() + " " + marker.tag)
+            if (marker.tag == it.id) {
+                //i("FOUND IT")
+                contentBinding.currentYear.text = it.year.toString()
+                Picasso.get().load(it.image).into(contentBinding.imageView)
+            }
+        }
 
         return false
     }

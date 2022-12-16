@@ -3,6 +3,7 @@ package org.wit.a20090170_assignment2.activities
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -12,6 +13,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -35,6 +39,7 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
     private var position: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityRentalCarListBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -50,10 +55,10 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
 
         binding.loadingBar.visibility = View.VISIBLE
 
-        var user = auth.currentUser
+        val user = auth.currentUser
         if (user != null) {
 
-            var carList = app.rentalCars.getCarsForUser(user.uid)
+            val carList = app.rentalCars.getCarsForUser(user.uid)
 
             Handler().postDelayed(Runnable {
                 binding.recyclerView.adapter =
@@ -67,6 +72,45 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
 
                 binding.loadingBar.visibility = View.GONE
             }, 2000)
+
+            //i("THEME: " + app.theme.toString())
+        }
+
+        binding.searchButton.setOnClickListener {
+
+            var brandToSearch = ""
+            var yearToSearch = 0
+
+            if(binding.searchBrand.text.isNotEmpty()) {
+                brandToSearch = binding.searchBrand.text.toString()
+            }
+            if(binding.searchYear.text.isNotEmpty()) {
+                yearToSearch = binding.searchYear.text.toString().toInt()
+            }
+
+            val newList = mutableListOf<RentalCarModel>()
+
+            app.rentalCars.findAll().forEach {
+                if(it.brand == brandToSearch && it.year == yearToSearch) {
+                    newList.add(it)
+
+                    //binding.recyclerView.adapter =
+                    //    RentalCarAdapter(newList, this)
+                }
+                else if(it.brand == brandToSearch) {
+                    newList.add(it)
+                }
+                else if(it.year == yearToSearch) {
+                    newList.add(it)
+                }
+                binding.recyclerView.adapter =
+                    RentalCarAdapter(newList, this)
+            }
+        }
+
+        binding.cancelButton.setOnClickListener {
+            binding.recyclerView.adapter =
+                RentalCarAdapter(app.rentalCars.findAll(), this)
         }
     }
 
@@ -84,10 +128,12 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
                 // launch the add page
                 val launcherIntent = Intent(this, RentalCarActivity::class.java)
                 getResult.launch(launcherIntent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
             R.id.item_map -> {
                 val launcherIntent = Intent(this, RentalCarsMapsActivity::class.java)
                 mapIntentLauncher.launch(launcherIntent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
             R.id.item_signOut -> {
                 // sign out and go to sign in page
@@ -105,11 +151,6 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
             ActivityResultContracts.StartActivityForResult()
         ) { }
 
-    private val signInIntentLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { }
-
     private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK) {
             (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.rentalCars.findAll().size)
@@ -122,6 +163,13 @@ class RentalCarListActivity : AppCompatActivity(), RentalCarListener {
         position = pos
         //i("ID: " + rentalCar.id)
         getClickResult.launch(launcherIntent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    }
+
+    override fun finish() {
+        super.finish()
+        auth.signOut()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
     private val getClickResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {

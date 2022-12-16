@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import org.wit.a20090170_assignment2.R
 import org.wit.a20090170_assignment2.databinding.ActivitySignInBinding
 import timber.log.Timber.i
 
@@ -31,8 +32,8 @@ class SignInActivity : AppCompatActivity() {
 
         binding.buttonSignIn.setOnClickListener {
             try {
-                var email = binding.emailSignIn.text.toString()
-                var password = binding.passwordSignIn.text.toString()
+                val email = binding.emailSignIn.text.toString()
+                val password = binding.passwordSignIn.text.toString()
                 if(email.isNotEmpty() && password.isNotEmpty()) {
                     signIn(email, password)
 
@@ -53,8 +54,8 @@ class SignInActivity : AppCompatActivity() {
 
         binding.buttonRegister.setOnClickListener {
             try {
-                var email = binding.emailRegister.text.toString()
-                var password = binding.passwordRegister.text.toString()
+                val email = binding.emailRegister.text.toString()
+                val password = binding.passwordRegister.text.toString()
                 if(email.isNotEmpty() && password.isNotEmpty()) {
                     createAccount(email, password)
 
@@ -74,7 +75,7 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    fun signIn(email: String, password: String) {
+    private fun signIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -84,6 +85,7 @@ class SignInActivity : AppCompatActivity() {
 
                     val launcherIntent = Intent(this, RentalCarListActivity::class.java)
                     listIntentLauncher.launch(launcherIntent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 } else {
                     // If sign in fails, display a message to the user.
                     //Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -94,7 +96,7 @@ class SignInActivity : AppCompatActivity() {
             }
     }
 
-    fun createAccount(email: String, password: String) {
+    private fun createAccount(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -104,6 +106,7 @@ class SignInActivity : AppCompatActivity() {
 
                     val launcherIntent = Intent(this, RentalCarListActivity::class.java)
                     listIntentLauncher.launch(launcherIntent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 } else {
                     // If sign in fails, display a message to the user.
                     //Log.w(TAG, "createUserWithEmail:failure", task.exception)

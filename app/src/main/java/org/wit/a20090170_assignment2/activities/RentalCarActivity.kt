@@ -9,7 +9,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.a20090170_assignment2.R
 import org.wit.a20090170_assignment2.databinding.ActivityCarRentalBinding
@@ -17,21 +16,19 @@ import org.wit.a20090170_assignment2.helpers.showImagePicker
 import org.wit.a20090170_assignment2.main.MainApp
 import org.wit.a20090170_assignment2.models.Location
 import org.wit.a20090170_assignment2.models.RentalCarModel
-import timber.log.Timber
 import timber.log.Timber.i
-import java.time.LocalDate
 
 class RentalCarActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCarRentalBinding
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
-    var rentalCar = RentalCarModel()
+    private var rentalCar = RentalCarModel()
     lateinit var app : MainApp
 
     //var location = Location()
 
-    var edit = false
+    private var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -167,6 +164,11 @@ class RentalCarActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
     private fun registerImagePickerCallback() {
